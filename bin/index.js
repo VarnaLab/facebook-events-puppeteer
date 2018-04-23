@@ -19,6 +19,10 @@ var puppeteer = require('puppeteer')
 var options = {
   // headless: false,
   // slowMo: 300,
+  args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+  ],
 }
 
 var lib = {
