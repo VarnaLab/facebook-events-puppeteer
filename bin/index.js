@@ -31,11 +31,16 @@ var lib = {
   db: require('../lib/db'),
 }
 
-puppeteer.launch(options).then((browser) => {
-  setInterval(() =>
-    lib.dom/*html*/.sync({browser, config, db})
-      .then((events) => lib.db.sync({events, db, fpath: argv.events}))
-      .catch(console.error)
-    , 1000 * 60 * config.interval)
-  })
-  .catch(console.error)
+;(async () => {
+  var browser = await puppeteer.launch(options)
+  try {
+    var events = await lib.dom.sync({browser, config, db})
+    lib.db.sync({events, db, fpath: argv.events})
+  }
+  catch (err) {
+    console.error(err)
+  }
+  finally {
+    browser.close()
+  }
+})()
