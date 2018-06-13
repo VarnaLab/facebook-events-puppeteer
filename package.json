@@ -15,7 +15,7 @@
     "he": "^1.1.1",
     "minimist": "^1.2.0",
     "puppeteer": "^1.3.0",
-    "request-compose": "0.0.12"
+    "request-compose": "0.0.18"
   },
   "devDependencies": {
     "request-logs": "0.0.5"
