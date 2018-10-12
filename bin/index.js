@@ -29,12 +29,15 @@ var lib = {
   dom: require('../lib/dom'),
   html: require('../lib/html'),
   db: require('../lib/db'),
+  utils: require('../lib/utils'),
 }
 
 ;(async () => {
   var browser = await puppeteer.launch(options)
   try {
-    var events = await lib.dom.sync({browser, config, db})
+    var events = await lib.dom.sync({
+      browser, config, cookie: lib.utils.parseCookie(config.cookie)
+    })
     lib.db.sync({events, db, fpath: argv.events})
   }
   catch (err) {
